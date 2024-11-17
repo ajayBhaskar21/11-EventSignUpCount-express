@@ -1,0 +1,37 @@
+<%# - include('layout') %>
+
+<h2>Upcoming Events</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Date</th>
+            <th>Location</th>
+            <th>Signup Count</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% events.forEach(event => { %>
+            <tr>
+                <td><%= event.title %></td>
+                <td><%= new Date(event.date).toLocaleDateString() %></td>
+                <td><%= event.location %></td>
+                <td><%= event.signupCount %></td>
+                <td>
+                    <form action="/events/<%= event._id %>/signup" method="POST">
+                        <button type="submit">Sign Up</button>
+                    </form>
+                </td>
+            </tr>
+        <% }) %>
+    </tbody>
+</table>
+
+<h3>Create New Event (For Testing)</h3>
+<form action="/events" method="POST">
+    <input type="text" name="title" placeholder="Event Title" required>
+    <input type="date" name="date" required>
+    <input type="text" name="location" placeholder="Location" required>
+    <button type="submit">Add Event</button>
+</form>
